@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Jasa Titip</title>
+    <style>
+        /* Basic reset */
+        body, h1, h2, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Layout Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+        }
+
+        .sidebar h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 12px 0;
+            text-align: left;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .sidebar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>GOHU Admin</h2>
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="kelolapaket.html">Kelola Paket</a></li>
+            <li><a href="#">Pengaturan</a></li>
+            <li><a href="#">Laporan</a></li>
+            <li><a href="index.html">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="header">
+            <h1>Welcome, Admin!</h1>
+        </div>
+
+        <!-- Dashboard Content -->
+        <div class="card">
+            <h3>Statistik Pengiriman Paket</h3>
+            <p>Total Paket Terkirim: 1243</p>
+            <p>Total Paket Sedang Diproses: 45</p>
+            <p>Total Paket Gagal Dikirim: 10</p>
+        </div>
+
+        <div class="card">
+            <h3>Informasi Pengguna</h3>
+            <p>Total Pengguna Terdaftar: 512</p>
+            <p>Pengguna Aktif: 348</p>
+            <p>Pengguna Tidak Aktif: 164</p>
+        </div>
+
+        <div class="card">
+            <h3>Kontak Admin</h3>
+            <p>Jika Anda memiliki pertanyaan atau membutuhkan bantuan lebih lanjut, silakan hubungi kami.</p>
+            <p>Email: support@gohu.com</p>
+            <p>Telepon: +628123456789</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 GOHU - Jasa Titip Paket. Semua hak dilindungi.</p>
+    </div>
+
+</body>
+</html>

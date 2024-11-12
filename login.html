@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Admin - Jasa Titip</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .login-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f2f2f2;
+        }
+
+        .login-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 22px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .forgot-password {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 12px;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Login Admin</h2>
+
+            <form id="login-form" onsubmit="return login()">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+
+                <button type="submit">Login</button>
+
+                <a href="#" class="forgot-password">Forgot Password?</a>
+            </form>
+
+            <p id="error-message" class="error-message" style="display: none;"></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Jasa Titip. Semua hak dilindungi.</p>
+    </footer>
+
+    <script>
+        // Username dan Password yang telah ditentukan
+        const adminUsername = "admingohu";
+        const adminPassword = "pulauobi1945";
+
+        // Fungsi login
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const errorMessage = document.getElementById("error-message");
+
+            // Verifikasi login
+            if (username === adminUsername && password === adminPassword) {
+                // Arahkan ke halaman dashboard admin (ganti dengan halaman yang sesuai)
+                window.location.href = "admin_dashboard.html";  // Perubahan di sini
+                return false;
+            } else {
+                errorMessage.textContent = "Username atau password salah!";
+                errorMessage.style.display = "block";
+                return false;
+            }
+        }
+    </script>
+
+</body>
+</html>

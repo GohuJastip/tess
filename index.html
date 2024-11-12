@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jasa Titip</title>
+    <style>
+        /* CSS Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            padding: 6px 0;
+            position: relative;
+        }
+
+        header p {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        /* Menu Login di kanan atas */
+        .login-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            font-size: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .login-btn:hover {
+            background-color: #45a049; /* Mengubah warna saat hover */
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;  /* Memusatkan elemen di tengah */
+            gap: 10px;  /* Mengatur jarak antar elemen */
+            margin: 100px 10px 10px 10px;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            background-color: transparent; /* Menghapus latar belakang */
+            border: none; /* Menghapus border */
+            padding: 4px;
+            width: 150px; /* Mengatur lebar fitur */
+            text-align: center;
+            font-size: 7px;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            font-size: 8px;
+            margin-bottom: 4px;
+        }
+
+        /* CSS untuk tombol */
+        button {
+            background-color: #4CAF50; /* Warna latar belakang hijau */
+            color: white; /* Warna teks putih */
+            border: none; /* Menghapus border pada tombol */
+            padding: 10px 20px; /* Menambahkan padding pada tombol */
+            cursor: pointer;
+            font-size: 10px;
+            border-radius: 5px; /* Sudut tombol melengkung */
+            transition: background-color 0.3s ease; /* Efek transisi saat hover */
+        }
+
+        /* Hover effect */
+        button:hover {
+            background-color: #45a049; /* Mengubah warna latar belakang saat hover */
+        }
+
+        footer {
+            text-align: center;
+            padding: 4px;
+            background-color: #4CAF50;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 8px;
+        }
+
+        /* Styling for the introduction section */
+        .intro {
+            text-align: center;
+            margin-top: 60px;
+            padding: 10px;
+            font-size: 10px;
+        }
+
+        /* Styling for "Selamat Datang" text */
+        .intro h2 {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Styling for the price text */
+        .price {
+            font-size: 12px;
+            color: #D4AF37;
+            font-weight: bold;
+        }
+
+        /* CSS untuk menata tombol di bawahnya */
+        .buttons {
+            display: flex;
+            justify-content: center; /* Memusatkan tombol */
+            gap: 10px; /* Mengatur jarak antar tombol */
+            margin-top: 20px;
+        }
+
+        /* Menyesuaikan lebar tombol agar sejajar */
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 4px;
+            width: 100%;
+        }
+
+        /* Menambahkan style untuk div pembungkus tombol */
+        .button-container {
+            display: inline-block;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Jasa Titip</h1>
+        <p>Layanan titip barang dari luar negeri yang mudah dan cepat.</p>
+
+        <!-- Menu Login di kanan atas -->
+        <a href="login.html" class="login-btn">Login Admin</a>
+    </header>
+
+    <!-- Fitur utama (dengan margin-top untuk menggeser ke bawah) -->
+    <section class="features">
+        <div class="feature" id="chat-admin">
+            <h2>Chat Admin</h2>
+            <p>Konsultasikan kebutuhan Anda dengan admin kami.</p>
+            <div class="button-container">
+                <button onclick="openChat()">Mulai Chat</button>
+            </div>
+        </div>
+        
+        <div class="feature" id="alamat-paket">
+            <h2>Alamat Paket</h2>
+            <p>Dapatkan alamat pengiriman untuk paket Anda.</p>
+            <div class="button-container">
+                <button onclick="showAlamat()">Lihat Alamat</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tombol cek paket dan alamat pengambilan di bawahnya -->
+    <section class="buttons">
+        <div class="feature" id="cek-paket">
+            <h2>Cek Paket</h2>
+            <p>Lacak status paket Anda dengan mudah.</p>
+            <div class="button-container">
+                <button onclick="cekPaket()">Cek Sekarang</button>
+            </div>
+        </div>
+
+        <div class="feature" id="alamat-pengambilan">
+            <h2>Alamat Pengambilan Paket</h2>
+            <p>Lihat alamat pengambilan paket Anda.</p>
+            <div class="button-container">
+                <button onclick="showAlamatPengambilan()">Lihat Alamat Pengambilan</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="intro">
+        <h2>Selamat Datang di GOHU!</h2>
+        <p>Kami menyediakan layanan jasa titip paket dengan harga terbaik dan pelayanan yang cepat dan aman.</p>
+        <p class="price">Jakarta ke Maluku Utara mulai dari Rp17.000/Kg</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Jasa Titip. Semua hak dilindungi.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        function openChat() {
+            alert("Silakan hubungi admin melalui WhatsApp: +628123456789");
+        }
+
+        function showAlamat() {
+            alert("Alamat Pengiriman:\nNama: Jasa Titip\nAlamat: Jalan Mawar No. 10, Jakarta\nKode Pos: 12345");
+        }
+
+        function cekPaket() {
+            let trackingNumber = prompt("Masukkan nomor resi paket Anda:");
+            if (trackingNumber) {
+                alert("Status paket untuk resi " + trackingNumber + " sedang dalam proses.");
+            }
+        }
+
+        function showAlamatPengambilan() {
+            alert("Alamat Pengambilan Paket:\nNama: Jasa Titip\nAlamat: Jalan Melati No. 20, Jakarta\nKode Pos: 54321");
+        }
+    </script>
+</body>
+</html>

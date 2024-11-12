@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <title>Daftar Alamat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #4e73df, #1cc88a); /* Latar belakang gradien */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            flex-direction: column; /* Mengatur elemen di dalam body agar berada dalam kolom */
+        }
+
+        .keterangan {
+            margin-bottom: 15px; /* Menambahkan jarak antara keterangan dan form */
+            font-size: 0.75em; /* Memperkecil ukuran font lebih kecil */
+            color: #333; /* Mengubah warna agar lebih mudah dibaca */
+            font-weight: 400; /* Menurunkan ketebalan font untuk memberikan kesan lebih ringan */
+            text-align: center; /* Menjaga keterangan tetap rata tengah */
+            line-height: 1.4; /* Menambah jarak antar baris agar lebih mudah dibaca */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px; /* Memperbesar ukuran kontainer */
+            background-color: transparent; /* Membuat latar belakang transparan */
+            border-radius: 15px;
+            box-shadow: none; /* Menghilangkan bayangan */
+            padding: 30px;
+            text-align: center;
+        }
+
+        /* Menyesuaikan lebar input agar sama dengan tombol kirim */
+        input[type="text"] {
+            width: 100%; /* Membuat lebar input sama dengan lebar tombol */
+            padding: 12px; /* Ukuran padding untuk keseragaman */
+            margin: 15px 0; /* Memberikan margin vertikal antar elemen */
+            border: 2px solid #ddd; /* Border input */
+            border-radius: 5px; /* Sudut input membulat */
+            font-size: 1em; /* Ukuran font yang sesuai */
+            outline: none; /* Menghilangkan outline saat difokuskan */
+            transition: all 0.3s ease-in-out; /* Animasi transisi saat fokus */
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff; /* Border biru saat input difokuskan */
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Efek fokus input */
+        }
+
+        /* Styling untuk tombol Kirim */
+        button {
+            display: inline-block;
+            width: 100%; /* Membuat tombol berbentuk sama dan memenuhi lebar kontainer */
+            padding: 12px;
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Hover efek untuk tombol */
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Efek aktif saat tombol ditekan */
+        button:active {
+            transform: translateY(2px);
+        }
+
+        /* Kontainer untuk tombol */
+        .button-container {
+            margin-top: 20px;
+        }
+
+        /* Responsif untuk perangkat kecil */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.4em;
+            }
+
+            input[type="text"],
+            button {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Menambahkan keterangan di atas form -->
+    <div class="keterangan">
+        Silahkan masukkan nama dan nomor WA kalian, lalu tekan tombol "Kirim" <br>
+        Setelah itu, cukup salin format yang muncul di bawah ini, dan langsung gunakan untuk alamat di Shopee, Tokopedia, Lazada, TikTok, dan platform lainnya!
+    </div>
+
+    <div class="container">
+        <!-- Form input -->
+        <form id="formAlamat">
+            <input type="text" id="nama" placeholder="Nama Anda" required>
+            <input type="text" id="wa" placeholder="Nomor WA" required>
+
+            <!-- Kontainer tombol Kirim -->
+            <div class="button-container">
+                <button type="submit"><i class="fas fa-paper-plane"></i> Kirim</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("formAlamat").addEventListener("submit", function(event) {
+            event.preventDefault(); // Mencegah pengiriman form tradisional
+
+            var nama = document.getElementById("nama").value;
+            var wa = document.getElementById("wa").value;
+
+            // Simpan data ke localStorage
+            localStorage.setItem("nama", nama);
+            localStorage.setItem("wa", wa);
+
+            // Setelah data disimpan, arahkan ke halaman prosesalamat.html
+            window.location.href = "Prosesalamat.html";
+        });
+    </script>
+</body>
+
+</html>

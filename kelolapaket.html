@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Paket - Admin Dashboard</title>
+    <style>
+        /* Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Button Add New Package */
+        .add-package-btn {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .add-package-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        /* Button Edit and Delete */
+        .btn {
+            padding: 6px 12px;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-edit {
+            background-color: #FFC107;
+        }
+
+        .btn-delete {
+            background-color: #F44336;
+        }
+
+        .btn-edit:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-delete:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Button to Generate PDF */
+        .generate-pdf-btn {
+            display: inline-block;
+            background-color: #2196F3;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .generate-pdf-btn:hover {
+            background-color: #1976D2;
+        }
+    </style>
+
+    <!-- Include jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Kelola Paket</h1>
+
+        <!-- Tombol Tambah Paket Baru -->
+        <a href="#" class="add-package-btn" onclick="openAddPackageForm()">Tambah Paket Baru</a>
+
+        <!-- Button to generate PDF -->
+        <a href="#" class="generate-pdf-btn" onclick="generatePDF()">Download PDF</a>
+
+        <!-- Tabel Daftar Paket -->
+        <table id="packageTable">
+            <thead>
+                <tr>
+                    <th>ID Paket</th>
+                    <th>Nama Penerima</th>
+                    <th>Nomor WA</th>
+                    <th>No Resi</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data Paket akan dimasukkan di sini oleh JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Form Tambah/Edit Paket -->
+    <div id="packageForm" style="display:none;">
+        <h2 id="formTitle">Tambah Paket Baru</h2>
+        <label for="receiverName">Nama Penerima</label><br>
+        <input type="text" id="receiverName" placeholder="Nama Penerima" required><br><br>
+        <label for="senderName">Nomor WA</label><br>
+        <input type="text" id="senderName" placeholder="Nomor WA Pengirim" required><br><br>
+        <label for="resiNumber">No Resi</label><br>
+        <input type="text" id="resiNumber" placeholder="No Resi" required><br><br>
+        <label for="status">Status</label><br>
+        <select id="status">
+            <option value="Dalam Proses">Dalam Proses</option>
+            <option value="Terkirim">Terkirim</option>
+            <option value="Dibatalkan">Dibatalkan</option>
+        </select><br><br>
+        <button onclick="savePackage()">Simpan Paket</button>
+        <button onclick="cancelForm()">Batal</button>
+    </div>
+
+    <script>
+        // Simpan data paket dalam array
+        let packages = [
+            { id: 1, receiver: 'Jane Doe', sender: '081234567890', status: 'Dalam Proses', resi: 'RA123456789' },
+            { id: 2, receiver: 'Bob', sender: '082345678901', status: 'Terkirim', resi: 'RA987654321' }
+        ];
+
+        // Menampilkan paket dalam tabel
+        function displayPackages() {
+            const tbody = document.querySelector('#packageTable tbody');
+            tbody.innerHTML = ''; // Kosongkan tabel
+            packages.forEach(pkg => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${pkg.id}</td>
+                    <td>${pkg.receiver}</td>
+                    <td>${pkg.sender}</td>
+                    <td>${pkg.resi}</td>
+                    <td>${pkg.status}</td>
+                    <td>
+                        <button class="btn btn-edit" onclick="editPackage(${pkg.id})">Edit</button>
+                        <button class="btn btn-delete" onclick="deletePackage(${pkg.id})">Hapus</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Fungsi untuk menambah paket baru
+        function openAddPackageForm() {
+            document.getElementById('packageForm').style.display = 'block';
+            document.getElementById('formTitle').innerText = 'Tambah Paket Baru';
+            document.getElementById('receiverName').value = '';
+            document.getElementById('senderName').value = '';
+            document.getElementById('status').value = 'Dalam Proses';
+            document.getElementById('resiNumber').value = '';
+        }
+
+        // Fungsi untuk menyimpan paket
+        function savePackage() {
+            const receiver = document.getElementById('receiverName').value;
+            const sender = document.getElementById('senderName').value;
+            const status = document.getElementById('status').value;
+            const resi = document.getElementById('resiNumber').value;
+
+            if (!receiver || !sender || !resi) {
+                alert('Semua kolom harus diisi!');
+                return;
+            }
+
+            // Cek apakah ini form untuk menambah atau mengedit paket
+            const formTitle = document.getElementById('formTitle').innerText;
+            if (formTitle === 'Tambah Paket Baru') {
+                // Tambah paket baru
+                const newId = packages.length ? packages[packages.length - 1].id + 1 : 1;
+                packages.push({ id: newId, receiver, sender, status, resi });
+            } else {
+                // Update paket yang sudah ada
+                const editingPackage = packages.find(pkg => pkg.id === window.editingPackageId);
+                editingPackage.receiver = receiver;
+                editingPackage.sender = sender;
+                editingPackage.status = status;
+                editingPackage.resi = resi;
+            }
+
+            // Tutup form dan tampilkan tabel paket
+            cancelForm();
+            displayPackages();
+        }
+
+        // Fungsi untuk mengedit paket
+        function editPackage(id) {
+            window.editingPackageId = id;
+            const packageToEdit = packages.find(pkg => pkg.id === id);
+            document.getElementById('receiverName').value = packageToEdit.receiver;
+            document.getElementById('senderName').value = packageToEdit.sender;
+            document.getElementById('status').value = packageToEdit.status;
+            document.getElementById('resiNumber').value = packageToEdit.resi;
+            document.getElementById('formTitle').innerText = 'Edit Paket';
+            document.getElementById('packageForm').style.display = 'block';
+        }
+
+        // Fungsi untuk menghapus paket
+        function deletePackage(id) {
+            const confirmDelete = confirm('Apakah Anda yakin ingin menghapus paket ID: ' + id + '?');
+            if (confirmDelete) {
+                packages = packages.filter(pkg => pkg.id !== id);
+                displayPackages();
+            }
+        }
+
+        // Fungsi untuk membatalkan form
+        function cancelForm() {
+            document.getElementById('packageForm').style.display = 'none';
+        }
+
+        // Fungsi untuk mengunduh paket sebagai PDF
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFontSize(12);
+
+            // Judul PDF
+            doc.text("Daftar Paket", 14, 10);
+
+            // Menambahkan data paket ke PDF
+            let yOffset = 20;
+            packages.forEach(pkg => {
+                doc.text(`ID: ${pkg.id}, Penerima: ${pkg.receiver}, Nomor WA: ${pkg.sender}, No Resi: ${pkg.resi}, Status: ${pkg.status}`, 14, yOffset);
+                yOffset += 10;
+            });
+
+            // Download PDF
+            doc.save('daftar_paket.pdf');
+        }
+
+        // Tampilkan data paket ketika halaman dimuat
+        displayPackages();
+    </script>
+
+</body>
+</html>
